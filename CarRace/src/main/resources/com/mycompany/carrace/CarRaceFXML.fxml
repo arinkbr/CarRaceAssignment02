@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -20,4 +23,24 @@
         <Label text="START" layoutX="81" layoutY="2" styleClass="track-label"/>
         <Label text="FINISH" layoutX="758" layoutY="2" styleClass="track-label"/>
     </Pane>
+    <HBox spacing="14">
+        <VBox spacing="10" prefWidth="388" styleClass="panel">
+            <Label text="Race controls" styleClass="heading"/>
+            <HBox spacing="8">
+                <Button fx:id="startButton" text="Start" styleClass="start-button"/>
+                <Button fx:id="pauseButton" text="Pause"/>
+                <Button fx:id="resetButton" text="Reset"/>
+            </HBox>
+            <Label text="Simulation speed" />
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Slider fx:id="speedSlider" min="0.5" max="2" value="1" prefWidth="220"/>
+                <Label fx:id="speedValue" text="1.0×" minWidth="45"/>
+            </HBox>
+        </VBox>
+        <VBox spacing="5" minHeight="172" HBox.hgrow="ALWAYS" styleClass="panel">
+            <Label text="Race results" styleClass="heading"/>
+            <Label fx:id="statusMessage" text="Press Start when you are ready." wrapText="true"/>
+            <VBox fx:id="results" spacing="3"/>
+        </VBox>
+    </HBox>
 </VBox>
