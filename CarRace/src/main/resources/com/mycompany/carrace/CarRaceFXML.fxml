@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="14" prefWidth="900" stylesheets="@race.css">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <Label text="Car Race" styleClass="title"/>
+    <Pane fx:id="track" prefWidth="860" minHeight="268" prefHeight="268" styleClass="track">
+        <Rectangle x="132" width="4" height="268" styleClass="start-line"/>
+        <Rectangle fx:id="finishLine" x="744" width="4" height="268" styleClass="finish-line"/>
+        <Line startX="10" endX="850" startY="67" endY="67" styleClass="lane-divider"/>
+        <Line startX="10" endX="850" startY="134" endY="134" styleClass="lane-divider"/>
+        <Line startX="10" endX="850" startY="201" endY="201" styleClass="lane-divider"/>
+        <Label text="START" layoutX="81" layoutY="2" styleClass="track-label"/>
+        <Label text="FINISH" layoutX="758" layoutY="2" styleClass="track-label"/>
+    </Pane>
+</VBox>

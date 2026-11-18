@@ -1,0 +1,31 @@
+.root {
+    -fx-background-color: #eef2f8;
+    -fx-font-family: "System";
+    -fx-font-size: 14px;
+}
+.label {
+    -fx-text-fill: #17283e;
+}
+.title {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+.track {
+    -fx-background-color: #29384a;
+    -fx-background-radius: 8px;
+}
+.lane-divider {
+    -fx-stroke: #8799ac;
+    -fx-stroke-dash-array: 12 8;
+}
+.start-line {
+    -fx-fill: #82ebc3;
+}
+.finish-line {
+    -fx-fill: #ffd478;
+}
+.track-label {
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
