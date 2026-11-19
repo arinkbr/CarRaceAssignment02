@@ -15,6 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
@@ -44,6 +47,7 @@ public class CarRaceController {
     private final List<TranslateTransition> movements = new ArrayList<>();
     private final PauseTransition slideTimer = new PauseTransition(Duration.seconds(3));
     private int slideIndex;
+    private MediaPlayer slideshowAudio;
     private RaceState state = RaceState.READY;
 
     @FXML
@@ -61,6 +65,7 @@ public class CarRaceController {
         slideIndex = 0;
         raceScreen.setVisible(false);
         slideshow.setVisible(true);
+        playSlideshowAudio();
         showSlide();
     }
 
@@ -76,6 +81,7 @@ public class CarRaceController {
             if (slideIndex < model.getCars().size()) {
                 showSlide();
             } else {
+                stopSlideshowAudio();
                 slideshow.setVisible(false);
                 raceScreen.setVisible(true);
             }
@@ -83,8 +89,35 @@ public class CarRaceController {
         slideTimer.playFromStart();
     }
 
+    private void playSlideshowAudio() {
+        try {
+            String soundFile = getClass().getResource("slides/intro.wav").toExternalForm();
+            slideshowAudio = new MediaPlayer(new Media(soundFile));
+            slideshowAudio.setVolume(0.45);
+            slideshowAudio.setCycleCount(MediaPlayer.INDEFINITE);
+            slideshowAudio.setOnError(() -> {
+                System.err.println("Could not play opening audio: " + slideshowAudio.getError());
+                stopSlideshowAudio();
+            });
+            slideshowAudio.play();
+        } catch (MediaException error) {
+            // A media error should not keep the race from opening.
+            System.err.println("Could not play opening audio: " + error.getMessage());
+            stopSlideshowAudio();
+        }
+    }
+
+    private void stopSlideshowAudio() {
+        if (slideshowAudio != null) {
+            slideshowAudio.setOnError(null);
+            slideshowAudio.dispose();
+            slideshowAudio = null;
+        }
+    }
+
     public void close() {
         slideTimer.stop();
+        stopSlideshowAudio();
         stopAnimations();
     }
 
