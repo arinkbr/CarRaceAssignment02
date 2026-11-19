@@ -44,24 +44,3 @@ The `slides` folder is beside the FXML file. The final slideshow uses four PNGs 
 The included `intro.wav` is a 12-second synthesized melody generated for this project. JavaFX Media plays it during the slideshow and stops it when the track opens. The included file is still the temporary soundtrack. Listen to it on the demo Mac and decide whether to use it as the final sound or replace it with a PCM WAV you have permission to submit. A replacement must use the same filename.
 
 The app loads the slides and audio from the project resources. Each picture shows for three seconds. Audio loops if the clip ends before the slideshow. The race itself uses live JavaFX shapes.
-
-## Assignment checklist
-
-- [x] Four cars with distinct types, numbers, colors, speeds, and lane positions.
-- [x] MVC with `CarRaceModel`, `CarRaceController`, and `CarRaceFXML.fxml`.
-- [x] Four-lane track with visible start and finish lines, bottom-left controls, and bottom-right results.
-- [x] Polygon body and roof, rectangle windows, two circle wheels, visible spokes, and a text number on each animated car.
-- [x] Start, pause, resume, reset, and speed control for movement and wheels.
-- [x] Winner announced by number and color, with all four cars listed in finishing order.
-- [x] Welcome message and four timed slides, followed by the race screen.
-- [x] JavaFX audio playback and cleanup with the temporary WAV.
-- [ ] Confirm whether the instructor accepts the four existing code-generated PNGs for the student-created artwork requirement.
-- [ ] Listen to the intro on the demo Mac and confirm the final soundtrack.
-- [ ] Open the layout in Scene Builder to verify the preview.
-- [ ] Upload the matching final project to the course's LEA and demonstrate it to the teacher.
-
-## Checks run on macOS
-
-- Maven `clean verify` and `javafx:run` both succeeded with JDK 24. JavaFX printed native-access and deprecation warnings under that JDK.
-- A JavaFX window check loaded the FXML and checked the car shapes, movement, wheel rotation, pause and resume, speed, repeated Start, reset during and after a race, finish positions and order, a second race, and stopping movement on close.
-- A check from the built JAR verified all four slideshow images, the switch to the race, and JavaFX Media playback and cleanup. The playback check measured the player's status and elapsed time. A listening check is still pending.
