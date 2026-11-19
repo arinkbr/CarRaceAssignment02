@@ -11,6 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.mycompany.carrace.CarRaceController"
       spacing="14" prefWidth="900" stylesheets="@race.css">
     <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
     <Label text="Car Race" styleClass="title"/>
@@ -27,9 +28,9 @@
         <VBox spacing="10" prefWidth="388" styleClass="panel">
             <Label text="Race controls" styleClass="heading"/>
             <HBox spacing="8">
-                <Button fx:id="startButton" text="Start" styleClass="start-button"/>
-                <Button fx:id="pauseButton" text="Pause"/>
-                <Button fx:id="resetButton" text="Reset"/>
+                <Button fx:id="startButton" onAction="#startRace" text="Start" styleClass="start-button"/>
+                <Button fx:id="pauseButton" onAction="#pauseRace" text="Pause"/>
+                <Button fx:id="resetButton" onAction="#resetRace" text="Reset"/>
             </HBox>
             <Label text="Simulation speed" />
             <HBox spacing="10" alignment="CENTER_LEFT">
