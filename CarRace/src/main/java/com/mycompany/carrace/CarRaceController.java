@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Locale;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
+import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -23,6 +26,10 @@ import javafx.util.Duration;
 public class CarRaceController {
     private enum RaceState { READY, RUNNING, PAUSED, FINISHED }
 
+    @FXML private VBox raceScreen;
+    @FXML private VBox slideshow;
+    @FXML private ImageView slideImage;
+    @FXML private Label slideCaption;
     @FXML private Pane track;
     @FXML private Rectangle finishLine;
     @FXML private Button startButton;
@@ -35,6 +42,8 @@ public class CarRaceController {
     private final CarRaceModel model = new CarRaceModel();
     private final List<CarView> carViews = new ArrayList<>();
     private final List<TranslateTransition> movements = new ArrayList<>();
+    private final PauseTransition slideTimer = new PauseTransition(Duration.seconds(3));
+    private int slideIndex;
     private RaceState state = RaceState.READY;
 
     @FXML
@@ -46,6 +55,37 @@ public class CarRaceController {
         speedSlider.valueProperty().addListener((value, oldSpeed, newSpeed) -> updateSpeed());
         updateSpeed();
         updateButtons();
+    }
+
+    public void startSlideshow() {
+        slideIndex = 0;
+        raceScreen.setVisible(false);
+        slideshow.setVisible(true);
+        showSlide();
+    }
+
+    private void showSlide() {
+        Car car = model.getCars().get(slideIndex);
+        String imagePath = "slides/car-" + car.getNumber() + ".png";
+        slideImage.setImage(new Image(getClass().getResource(imagePath).toExternalForm()));
+        slideCaption.setText((slideIndex + 1) + " / " + model.getCars().size()
+                + "   " + car.getDescription());
+
+        slideTimer.setOnFinished(event -> {
+            slideIndex++;
+            if (slideIndex < model.getCars().size()) {
+                showSlide();
+            } else {
+                slideshow.setVisible(false);
+                raceScreen.setVisible(true);
+            }
+        });
+        slideTimer.playFromStart();
+    }
+
+    public void close() {
+        slideTimer.stop();
+        stopAnimations();
     }
 
     private void addCar(Car car) {

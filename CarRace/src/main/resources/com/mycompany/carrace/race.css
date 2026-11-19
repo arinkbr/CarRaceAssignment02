@@ -55,3 +55,10 @@
 .button.start-button:hover {
     -fx-background-color: #0f543f;
 }
+.slideshow {
+    -fx-background-color: #eef2f8;
+}
+.slide-card {
+    -fx-background-color: #29384a;
+    -fx-background-radius: 12px;
+}

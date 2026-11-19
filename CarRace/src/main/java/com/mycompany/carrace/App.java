@@ -21,13 +21,14 @@ public class App extends Application {
         controller = loader.getController();
         stage.setTitle("Car Race");
         stage.setResizable(false);
+        controller.startSlideshow();
         stage.show();
     }
 
     @Override
     public void stop() {
         if (controller != null) {
-            controller.stopAnimations();
+            controller.close();
         }
     }
 
